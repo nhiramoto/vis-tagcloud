@@ -108,7 +108,6 @@ d3.json('data/data.json', function(error, graph) {
     }
 });
 
-
 var stroke;
 
 var node_mouseover = function() {
