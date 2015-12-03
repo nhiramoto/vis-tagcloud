@@ -7,16 +7,16 @@ var padding = 1;    // collision
 
 var force = d3.layout.force()
                 .size([width, height])
-                .charge(-220)
-                .gravity(0.05)
-                .friction(0.6)
-                .linkDistance(150);
+                .charge(-120)
+                .gravity(0.01)
+                .friction(0.8)
+                .linkDistance(180);
 
 var svg = d3.select('#content').append('svg');
 
 var maxNodeSize = 50;
 
-d3.json('data/data.json', function(error, graph) {
+d3.json('data/graphData.json', function(error, graph) {
     if (error) throw error;
 
     force
@@ -127,7 +127,7 @@ var node_mouseout = function() {
 
 var node_click = function(d) {
     console.log('id:', d.id, 'name: ', d.name);
-
+    updateCloud(d.id);
 };
 
 var link_mouseover = function() {

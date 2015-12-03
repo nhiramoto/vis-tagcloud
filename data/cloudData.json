@@ -1,0 +1,8 @@
+{
+    "tags": [
+        {"nid": 1, "word": "Visualização", "size": 12},
+        {"nid": 2, "word": "Visão Computacional", "size": 21},
+        {"nid": 3, "word": "Inteligência Artificial", "size": 26},
+        {"nid": 4, "word": "Processamento de Imagens", "size": 43}
+    ]
+}
