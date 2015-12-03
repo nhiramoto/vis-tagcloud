@@ -1,8 +1,6 @@
-{
-    "tags": [
-        {"nid": 1, "word": "Visualização", "size": 12},
-        {"nid": 2, "word": "Visão Computacional", "size": 21},
-        {"nid": 3, "word": "Inteligência Artificial", "size": 26},
-        {"nid": 4, "word": "Processamento de Imagens", "size": 43}
-    ]
-}
+[
+    {"text": "Vis Dados", "size": 48, "nid": 1},
+    {"text": "Vis Comp", "size": 72, "nid": 2},
+    {"text": "IA", "size": 103, "nid": 3},
+    {"text": "PDI", "size": 67, "nid": 4}
+]
