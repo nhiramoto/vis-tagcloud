@@ -111,18 +111,18 @@ d3.json('data/graphData.json', function(error, graph) {
 var stroke;
 
 var node_mouseover = function() {
-    stroke = d3.select(this).select('circle').style('stroke');
-    d3.select(this).select('circle').transition()
-        .duration(400)
-        .attr('r', radius+8)
-        .style('box-shadow', '0 0 3px blue');
+    //stroke = d3.select(this).select('circle').style('stroke');
+    //d3.select(this).select('circle').transition()
+        //.duration(400)
+        //.attr('r', radius+8)
+        //.style('box-shadow', '0 0 3px blue');
 };
 
 var node_mouseout = function() {
-    d3.select(this).select('circle').transition()
-        .duration(400)
-        .attr('r', radius)
-        .style('box-shadow', '');
+    //d3.select(this).select('circle').transition()
+        //.duration(400)
+        //.attr('r', radius)
+        //.style('box-shadow', '');
 };
 
 var node_click = function(d) {

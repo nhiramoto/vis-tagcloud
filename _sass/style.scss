@@ -96,6 +96,12 @@ svg {
     stroke: #acacac;
     stroke-width: 5px;
     cursor: pointer;
+    transition: all .7s ease;
+}
+
+.node:hover {
+    transition: all .7s ease;
+    stroke: red;
 }
 
 #header {
