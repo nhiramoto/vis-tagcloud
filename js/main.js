@@ -13,7 +13,7 @@ $(document).ready(function() {
         isHide = !isHide;
     };
 
-    var revealRightPane = () => {
+    var revealRightPane = function() {
         if (isHide) {
             $('.right-pane').animate({
                 width: 'show'
@@ -24,7 +24,7 @@ $(document).ready(function() {
         }
     };
 
-    var hideRightPane = () => {
+    var hideRightPane = function() {
         if (!isHide) {
             $('.right-pane').animate({
                 width: 'hide'
