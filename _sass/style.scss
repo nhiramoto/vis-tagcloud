@@ -33,7 +33,6 @@ body {
     height: 30px;
     width: 100%;
     padding-top: 15px;
-    border: 1px dotted red;
     background: linear-gradient(to bottom, #222, #555);
     background: -webkit-linear-gradient(to bottom, #222, #555);
     background: -moz-linear-gradient(to bottom, #222, #555);
@@ -43,7 +42,6 @@ body {
     color: white;
 
     #title {
-        border: 1px dashed magenta;
         position: relative;
         width: auto;
         height: 100%;
@@ -65,7 +63,6 @@ body {
     height: available;
     width: available;
     height: 90%;
-    border: 1px dashed magenta;
 }
 
 
@@ -78,7 +75,6 @@ body {
     width: $rp-width;
     border-radius: 5px;
     box-shadow: 0 5px 8px gray;
-    border: 1px dashed orange;
 }
 
 svg {
