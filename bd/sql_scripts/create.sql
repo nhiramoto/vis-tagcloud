@@ -15,7 +15,7 @@ create table if not exists Tag (
 create table if not exists Tag_Pesquisador (
     idPesquisador integer not null,
     idTag integer not null,
-    peso integer not null,
+    peso integer not null default 1,
     primary key (idPesquisador, idTag),
     constraint fk_pesquisador
         foreign key (idPesquisador) references Pesquisador(id),
