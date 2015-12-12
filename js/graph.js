@@ -16,8 +16,9 @@ var svg = d3.select('#content').append('svg');
 
 var maxNodeSize = 50;
 
-d3.json('data/graphData.json', function(error, graph) {
-    if (error) throw error;
+var createGraph = function() {
+
+    var graph = getGraph();
 
     force
         .nodes(graph.nodes)
@@ -61,6 +62,11 @@ d3.json('data/graphData.json', function(error, graph) {
                 return d3.select(this).select('circle');
             });
 
+    node.append('svg:text')
+            .text(function(d) { return d.id; })
+            .style('stroke', 'black')
+            .style('stroke-width', '1px');
+
     node.append('title')
         .text(function(d) { return d.name; });
 
@@ -77,7 +83,7 @@ d3.json('data/graphData.json', function(error, graph) {
             .attr('y1', function(d) { return d.source.y; })
             .attr('x2', function(d) { return d.target.x; })
             .attr('y2', function(d) { return d.target.y; });
-        node.each(collide(0.5));
+        //node.each(collide(0.5));
     });
 
     // url: http://www.coppelia.io/2014/07/an-a-to-z-of-extra-features-for-the-d3-force-layout/
@@ -106,7 +112,7 @@ d3.json('data/graphData.json', function(error, graph) {
         });
       };
     }
-});
+};
 
 var stroke;
 
@@ -146,4 +152,21 @@ var link_mouseout = function() {
 
 var link_click = function(d) {
     console.log('source:', d.source.id, 'target:', d.target.id);
+};
+
+var getGraph = function() {
+    getGraph.ret;
+    $.ajax({
+        url: "php/get_graph_data.php",
+        type: "POST",
+        dataType: "json",
+        data: {fromApp: true},
+        success: function(data) {
+            getGraph.ret = data;
+        },
+        error: function(request, status, errorThrown) {
+            console.log('Erro na requisição ', errorThrown);
+        }
+    });
+    console.dir(getGraph.ret);
 };

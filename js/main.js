@@ -34,4 +34,7 @@ $(document).ready(function() {
             });
         }
     };
+
+    console.log('creating graph...');
+    createGraph();
 });

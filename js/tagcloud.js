@@ -14,6 +14,7 @@ d3.json('data/cloudData.json', function(data) {
 
     this.drawCloud = function(words) {
         console.log('drawing words...');
+        console.log(words);
         container
             .selectAll('text')
             .data(words)
