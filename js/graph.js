@@ -16,9 +16,10 @@ var svg = d3.select('#content').append('svg');
 
 var maxNodeSize = 50;
 
-var createGraph = function() {
+var createGraph = function(graph) {
 
-    var graph = getGraph();
+    console.log("graph:");
+    console.dir(graph);
 
     force
         .nodes(graph.nodes)
@@ -44,6 +45,8 @@ var createGraph = function() {
                         .on('mouseout', node_mouseout)
                         .on('click', node_click)
                         .call(force.drag);
+
+    console.log('creating circles...');
 
     node
         .append('circle')
@@ -154,19 +157,17 @@ var link_click = function(d) {
     console.log('source:', d.source.id, 'target:', d.target.id);
 };
 
-var getGraph = function() {
-    getGraph.ret;
+var initGraph = function() {
     $.ajax({
         url: "./php/get_graph_data.php",
         type: "POST",
         dataType: "json",
         data: {fromApp: true},
         success: function(data) {
-            getGraph.ret = data;
+            createGraph(data);
         },
         error: function(request, status, errorThrown) {
             console.log('Erro na requisição ', errorThrown);
         }
     });
-    console.dir(getGraph.ret);
 };
