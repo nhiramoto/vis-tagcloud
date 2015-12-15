@@ -157,7 +157,7 @@ var link_click = function(d) {
 var getGraph = function() {
     getGraph.ret;
     $.ajax({
-        url: "php/get_graph_data.php",
+        url: "./php/get_graph_data.php",
         type: "POST",
         dataType: "json",
         data: {fromApp: true},
