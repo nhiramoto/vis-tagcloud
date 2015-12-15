@@ -30,6 +30,7 @@ begin
 end$$
 
 drop procedure if exists `get_nodes`$$
+create procedure `get_nodes`()
 begin
     select id, nome as name from Pesquisador;
 end$$
@@ -37,7 +38,7 @@ end$$
 drop procedure if exists `get_links`$$
 create procedure `get_links`()
 begin
-    select p1.idPesquisador-1 as source, p2.idPesquisador-1 as target, p1.peso+p2.peso as peso
+    select p1.idPesquisador as source, p2.idPesquisador as target, p1.peso+p2.peso as peso
         from Tag_Pesquisador as p1, Tag_Pesquisador as p2
         where p1.idPesquisador<>p2.idPesquisador and p1.idTag=p2.idTag;
 end$$

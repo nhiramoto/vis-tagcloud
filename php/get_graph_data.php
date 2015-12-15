@@ -2,7 +2,7 @@
     if (isset($_POST['fromApp']) and $_POST['fromApp'] == true) {
         try {
             $conn = new PDO('mysql:host=localhost;dbname=tagcloud;', 'toshiaki', '');
-            $sql = $conn->prepare('select * from Pesquisador;');
+            $sql = $conn->prepare('call get_nodes();');
             $sql->execute();
             $nodes = $sql->fetchAll(PDO::FETCH_ASSOC);
             #var_dump($nodes);

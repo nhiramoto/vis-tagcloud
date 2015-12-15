@@ -65,7 +65,12 @@ svg {
 .link {
   stroke: #acacac;
   stroke-width: 7px;
-  cursor: pointer; }
+  cursor: pointer;
+  transition: all .3s ease; }
+
+.link:hover {
+  transition: all .3s ease;
+  stroke: blue; }
 
 .node {
   stroke: #acacac;
@@ -75,7 +80,7 @@ svg {
 
 .node:hover {
   transition: all .7s ease;
-  stroke: red; }
+  stroke: blue; }
 
 #header > div {
   display: inline-block; }

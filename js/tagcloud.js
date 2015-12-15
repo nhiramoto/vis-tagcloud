@@ -51,7 +51,11 @@ d3.json('data/cloudData.json', function(data) {
         console.log('creating cloud...');
         var cloud = d3.layout.cloud()
                         .size([400, 400])
-                        .words(data.filter(d => d.nid===id1 || d.nid===id2))
+                        .words(data.filter(d => {
+                            //console.log('nid:');
+                            //console.dir(d.nid);
+                            return d.nid===id1 || d.nid===id2;
+                        }))
                         .rotate(function() {
                             return ~~(Math.random() * 2) * 90;
                         })

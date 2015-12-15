@@ -7,9 +7,9 @@ var padding = 1;    // collision
 
 var force = d3.layout.force()
                 .size([width, height])
-                .charge(-120)
-                .gravity(0.01)
-                .friction(0.8)
+                .charge(-220)
+                .gravity(0.08)
+                .friction(0.4)
                 .linkDistance(180);
 
 var svg = d3.select('#content').append('svg');
@@ -45,8 +45,6 @@ var createGraph = function(graph) {
                         .on('mouseout', node_mouseout)
                         .on('click', node_click)
                         .call(force.drag);
-
-    console.log('creating circles...');
 
     node
         .append('circle')
@@ -164,6 +162,14 @@ var initGraph = function() {
         dataType: "json",
         data: {fromApp: true},
         success: function(data) {
+            console.log('data:');
+            console.dir(data);
+            for (var i = 0; i < data.links.length; i++) {
+                var source = data.links[i].source;
+                var target = data.links[i].target;
+                data.links[i].source = data.nodes[source-1];
+                data.links[i].target = data.nodes[target-1];
+            }
             createGraph(data);
         },
         error: function(request, status, errorThrown) {
