@@ -48,14 +48,14 @@ create procedure `get_tags`(in nid1 integer, in nid2 integer)
 begin
     if nid2 is null then
         if nid1 is null then
-            signal '45000'
-                set MESSAGE_TEXT='Pelo menos um id deve ser fornecido';
+            signal sqlstate '45000'
+              set MESSAGE_TEXT='Pelo menos um id deve ser fornecido';
         end if;
-        select distinct nomeTag from Tag, Tag_Pesquisador
+        select nomeTag as text, peso as size from Tag, Tag_Pesquisador
             where Tag.id=Tag_Pesquisador.idTag and
                 idPesquisador=nid1;
     else
-        select nomeTag from Tag,
+        select nomeTag as text, peso as size from Tag,
             (select idTag from Tag_Pesquisador
                 where idPesquisador=nid1
             ) as s1,
