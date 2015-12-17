@@ -8,7 +8,7 @@ var padding = 1;    // collision
 var force = d3.layout.force()
                 .size([width, height])
                 .charge(-220)
-                .gravity(0.08)
+                .gravity(0.03)
                 .friction(0.4)
                 .linkDistance(180);
 
@@ -134,7 +134,7 @@ var node_mouseout = function() {
 
 var node_click = function(d) {
     console.log('id:', d.id, 'name: ', d.name);
-    updateCloud(d.id);
+    requestTags(d.id);
 };
 
 var link_mouseover = function() {

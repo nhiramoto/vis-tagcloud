@@ -61,19 +61,24 @@ var updateCloud = function(data) {
                     .start();
 };
 
-var requestTags(nid1, nid2) {
-    $.ajax({
-        url: "",
-        type: "POST",
-        dataType: "json",
-        data: {fromApp: true},
-        success: function(data) {
-            console.log('data');
-            console.dir(data);
-            updateCloud(data);
-        },
-        error: function(request, status, errorThrown) {
-            console.log('Erro na requisição ', errorThrown);
-        }
-    });
+var requestTags = function(nid1, nid2) {
+    console.log('nid1:', nid1, 'nid2:', nid2);
+    if (nid1 === undefined && nid2 == undefined) {
+        console.error('Pelo menos um id deve ser fornecido.');
+    } else {
+        $.ajax({
+            url: "php/get_tags.php",
+            type: "GET",
+            dataType: "json",
+            data: {"fromApp": true, "nid1": nid1, "nid2": nid2},
+            success: function(data) {
+                console.log('data');
+                console.dir(data);
+                updateCloud(data);
+            },
+            error: function(request, status, errorThrown) {
+                console.log('Erro na requisição ', errorThrown);
+            }
+        });
+    }
 };
