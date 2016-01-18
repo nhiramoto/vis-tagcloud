@@ -3,9 +3,9 @@ use tagcloud;
 delimiter $$
 
 drop procedure if exists `insert_pesquisador`$$
-create procedure `insert_pesquisador`(in nome varchar(45))
+create procedure `insert_pesquisador`(in id integer, in nome varchar(45), in citadoComo varchar(45))
 begin
-    insert into Pesquisador (nome) value(nome);
+    insert into Pesquisador value (id, nome, citadoComo);
 end$$
 
 drop procedure if exists `remove_pesquisador`$$
@@ -15,6 +15,11 @@ begin
     if row_count()=0 then
         select 'Pesquisador não encontrado.';
     end if;
+end$$
+
+drop procedure if exists `insert_publicacao`$$
+create procedure `insert_publicacao`(in id integer, in titulo varchar(45), in referencia varchar(45), in link varchar(45))
+begin
 end$$
 
 drop procedure if exists `insert_tag`$$

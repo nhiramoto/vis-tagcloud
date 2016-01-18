@@ -3,35 +3,40 @@ create database if not exists tagcloud;
 use tagcloud;
 
 create table if not exists Pesquisador (
-    id integer auto_increment primary key,
-    nome varchar(45) not null
+    id integer primary key,
+    nome varchar(45) unique not null,
+    citadoComo varchar(45)
 );
 
-create table if not exists Artigo (
-    id integer auto_increment primary key,
-    nome varchar(45) not null
+create table if not exists Publicacao (
+    id integer primary key,
+    nome varchar(250) not null,
+    referencia varchar(250) not null,
+    link varchar(45)
 );
 
-create table if not exists Autoria (
+create table if not exists Keyword (
+    id integer primary key,
+    word varchar(45) not null
+);
+
+create table if not exists Pesquisador_Publicacao (
     idPesquisador integer,
-    idArtigo integer,
-    constraint fk_pesq_autoria
+    idPublicacao integer,
+    primary key (idPesquisador, idPublicacao),
+    constraint fk_autoria_pesq
         foreign key (idPesquisador) references Pesquisador (id),
-    constraint fk_artigo_autoria
-        foreign key (idArtigo) references Artigo (id)
+    constraint fk_autoria_public
+        foreign key (idPublicacao) references Publicacao (id)
 );
 
-create table if not exists Tag (
-    id integer auto_increment primary key,
-    nomeTag varchar (50) not null
-);
-
-create table if not exists Artigo_Tag (
-    idArtigo integer,
-    idTag integer,
-    primary key (idArtigo, idTag),
-    constraint fk_arttag_artigo
-        foreign key (idArtigo) references Artigo (id),
-    constraint fk_arttag_tag
-        foreign key (idTag) references Tag (id)
+create table if not exists Publicacao_Keyword (
+    idPublicacao integer,
+    idKeyword integer,
+    peso float not null,
+    primary key (idPublicacao, idKeyword),
+    constraint fk_pubkey_public
+        foreign key (idPublicacao) references Publicacao (id),
+    constraint fk_pubkey_key
+        foreign key (idKeyword) references Keyword (id)
 );
