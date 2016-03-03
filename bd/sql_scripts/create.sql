@@ -1,16 +1,15 @@
-create database if not exists tagcloud;
+create database if not exists Tagcloud;
 
-use tagcloud;
+use Tagcloud;
 
 create table if not exists Pesquisador (
     id integer primary key,
-    nome varchar(45) unique not null,
-    citadoComo varchar(45)
+    nome varchar(45) unique not null
 );
 
 create table if not exists Publicacao (
     id integer primary key,
-    nome varchar(250) not null,
+    titulo varchar(250) not null,
     referencia varchar(250) not null,
     link varchar(45)
 );
@@ -39,4 +38,11 @@ create table if not exists Publicacao_Keyword (
         foreign key (idPublicacao) references Publicacao (id),
     constraint fk_pubkey_key
         foreign key (idKeyword) references Keyword (id)
+);
+
+-- Preenchida pela trigger `create_links`
+create table if not exists Links (
+    idPesq1 integer,
+    idPesq2 integer,
+    primary key (idPesq1, idPesq2)
 );
