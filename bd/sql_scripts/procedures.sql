@@ -88,7 +88,7 @@ create procedure `get_links`()
 begin
     select idPesq1 as source, idPesq2 as target from Links;
 end$$
- 
+
 -- drop procedure if exists `get_tags`$$
 -- create procedure `get_tags`(in nid1 integer, in nid2 integer)
 -- begin

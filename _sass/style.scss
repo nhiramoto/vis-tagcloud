@@ -3,7 +3,14 @@
 $rp-width: 500px;
 
 $header-height: 50px;
-$header-bgcolor: #444;
+$header-bg: black;
+$header-txtcolor: white;
+
+$size: 30px;
+$thickness: 4px;
+$gap: 6px;
+$color: #CFD8DC;
+$roundCap: true;
 
 * {
        -moz-box-sizing: border-box;
@@ -21,10 +28,6 @@ body {
     //overflow: hidden;
 }
 
-#header, #content, #right-pane {
-    padding: 10px;
-}
-
 .header {
     position: fixed;
     top: 0;
@@ -34,25 +37,89 @@ body {
     width: 100%;
     height: $header-height;
     margin: 0;
-    background-color: $header-bgcolor;
-    color: white;
+    background: $header-bg;
+    color: $header-txtcolor;
+
+    a {
+        display: inline-block;
+        color: inherit;
+        margin-top: 5px;
+        margin-left: 10px;
+    }
+
+    .logo {
+        height: 37px;
+    }
 
     .title {
         display: inline-block;
-        margin-top: 7px;
-        margin-left: 7px;
         height: 35px;
         width: 500px;
-        padding-left: 10px;
+        margin-left: 15px;
+        margin-top: 7px;
         font-family: "Bitstream Charter", "Helvetica", sans-serif;
         font-weight: bold;
-        font-size: 26px;
+        font-size: 25px;
         text-align: left;
-        border: 1px dotted red;
+        vertical-align: top;
+        // border: 1px dotted red;
+    }
+
+    .cloud-toggle {
+        float: right;
+        // border: 1px dashed magenta;
+        height: 35px;
+        margin-top: 8px;
+        margin-right: 10px;
+        input {
+            display: none;
+        }
+        label {
+            display: block;
+            width: $size;
+            height: ($thickness * 3 + $gap * 2);
+            position: relative;
+            span {
+                position: relative;
+                top: $thickness + $gap;
+                &,
+                &:after,
+                &:before {
+                    display: block;
+                    background-color: $color;
+                    width: $size;
+                    height: $thickness;
+                    @if $roundCap {
+                        border-radius: 1px;
+                    }
+                }
+                &:before,
+                &:after {
+                    content: '';
+                    position: absolute;
+                }
+                &:before {
+                    bottom: $gap + $thickness;
+                }
+                &:after {
+                    top: $gap + $thickness;
+                }
+                .right & {
+                    &:before {
+                        transform-origin: top right;
+                        right: 0;
+                    }
+                    &:after {
+                        transform-origin: bottom right;
+                        right: 0;
+                    }
+                }
+            }
+        }
     }
 }
 
-#content {
+.content {
     margin-top: 0px;
     height: available;
     width: available;
@@ -69,14 +136,14 @@ body {
     height: 600px;
     border-radius: 0;
     box-shadow: 0 5px 8px gray;
-    background-color: aliceblue;
+    background: -webkit-linear-gradient(top, #EEE 0%, #FFF 30%);
 
     .cloud-header {
         padding: 0;
         border: 1px solid blue;
         height: 70px;
         font-family: "DejaVu Serif", "Helvetica", sans-serif;
-        
+
         .rsinfo {
             display: inline-block;
             width: 80%;

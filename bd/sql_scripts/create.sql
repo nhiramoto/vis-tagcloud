@@ -44,5 +44,9 @@ create table if not exists Publicacao_Keyword (
 create table if not exists Links (
     idPesq1 integer,
     idPesq2 integer,
-    primary key (idPesq1, idPesq2)
+    primary key (idPesq1, idPesq2),
+    constraint fk_links_pesq1
+        foreign key (idPesq1) references Pesquisador (id),
+    constraint fk_links_pesq2
+        foreign key (idPesq2) references Pesquisador (id)
 );
