@@ -39,46 +39,26 @@ body {
     font-size: 25px;
     text-align: left;
     vertical-align: top; }
-  .header .cloud-toggle {
+  .header .cloud-icon {
     float: right;
-    height: 35px;
-    margin-top: 8px;
-    margin-right: 10px; }
-    .header .cloud-toggle input {
-      display: none; }
-    .header .cloud-toggle label {
-      display: block;
-      width: 30px;
-      height: 24px;
-      position: relative; }
-      .header .cloud-toggle label span {
-        position: relative;
-        top: 10px; }
-        .header .cloud-toggle label span, .header .cloud-toggle label span:after, .header .cloud-toggle label span:before {
-          display: block;
-          background-color: #CFD8DC;
-          width: 30px;
-          height: 4px;
-          border-radius: 1px; }
-        .header .cloud-toggle label span:before, .header .cloud-toggle label span:after {
-          content: '';
-          position: absolute; }
-        .header .cloud-toggle label span:before {
-          bottom: 10px; }
-        .header .cloud-toggle label span:after {
-          top: 10px; }
-        .right .header .cloud-toggle label span:before {
-          transform-origin: top right;
-          right: 0; }
-        .right .header .cloud-toggle label span:after {
-          transform-origin: bottom right;
-          right: 0; }
+    height: 100%;
+    width: 60px;
+    cursor: pointer; }
+    .header .cloud-icon img {
+      vertical-align: middle;
+      height: 100%; }
 
 .content {
   margin-top: 0px;
   height: available;
   width: available;
   height: 90%; }
+
+.dialog {
+  position: fixed;
+  display: none;
+  height: 250px;
+  width: 400px; }
 
 .right-pane {
   position: fixed;
@@ -89,7 +69,8 @@ body {
   height: 600px;
   border-radius: 0;
   box-shadow: 0 5px 8px gray;
-  background: -webkit-linear-gradient(top, #EEE 0%, #FFF 30%); }
+  background-color: white;
+  z-index: 10; }
   .right-pane .cloud-header {
     padding: 0;
     border: 1px solid blue;
@@ -103,12 +84,10 @@ body {
       border: 1px dashed magenta;
       vertical-align: middle; }
       .right-pane .cloud-header .rsinfo .name {
-        height: 50%;
+        padding: 5px;
+        height: 100%;
         border: 1px dotted blue; }
-      .right-pane .cloud-header .rsinfo .citation {
-        height: 50%;
-        border: 1px dotted blue; }
-    .right-pane .cloud-header .photo {
+    .right-pane .cloud-header #photo {
       display: inline-block;
       width: 16%;
       height: 100%;

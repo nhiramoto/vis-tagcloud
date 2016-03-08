@@ -1,10 +1,14 @@
 $(document).ready(function() {
-    $('.nav-icon').click(function(e) {
-        $(this).toggleClass('active');
+    $('.cloud-icon').unbind('click');
+    $('.cloud-icon').bind('click', function(e) {
+        console.log('click!');
+        toggleRightPane();
     });
 
-    var isHide=true;
+    var isHide = false;
     var toggleRightPane = function() {
+        console.log('toggleRightPane');
+        console.log('isHide: ', isHide);
         if (isHide) {
             revealRightPane();
         } else {
@@ -14,6 +18,7 @@ $(document).ready(function() {
     };
 
     var revealRightPane = function() {
+        console.log('revealRightPane');
         if (isHide) {
             $('.right-pane').animate({
                 width: 'show'
@@ -25,6 +30,7 @@ $(document).ready(function() {
     };
 
     var hideRightPane = function() {
+        console.log('hideRightPane');
         if (!isHide) {
             $('.right-pane').animate({
                 width: 'hide'

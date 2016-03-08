@@ -1,6 +1,7 @@
 @import '_mixins';
 
 $rp-width: 500px;
+$rp-right-padding: 0;
 
 $header-height: 50px;
 $header-bg: black;
@@ -65,56 +66,15 @@ body {
         // border: 1px dotted red;
     }
 
-    .cloud-toggle {
+    .cloud-icon {
         float: right;
-        // border: 1px dashed magenta;
-        height: 35px;
-        margin-top: 8px;
-        margin-right: 10px;
-        input {
-            display: none;
-        }
-        label {
-            display: block;
-            width: $size;
-            height: ($thickness * 3 + $gap * 2);
-            position: relative;
-            span {
-                position: relative;
-                top: $thickness + $gap;
-                &,
-                &:after,
-                &:before {
-                    display: block;
-                    background-color: $color;
-                    width: $size;
-                    height: $thickness;
-                    @if $roundCap {
-                        border-radius: 1px;
-                    }
-                }
-                &:before,
-                &:after {
-                    content: '';
-                    position: absolute;
-                }
-                &:before {
-                    bottom: $gap + $thickness;
-                }
-                &:after {
-                    top: $gap + $thickness;
-                }
-                .right & {
-                    &:before {
-                        transform-origin: top right;
-                        right: 0;
-                    }
-                    &:after {
-                        transform-origin: bottom right;
-                        right: 0;
-                    }
-                }
-            }
+        height: 100%;
+        width: 60px;
+        cursor: pointer;
+
+        img {
+            vertical-align: middle;
+            height: 100%;
         }
     }
 }
@@ -126,17 +86,24 @@ body {
     height: 90%;
 }
 
+.dialog {
+    position: fixed;
+    display: none;
+    height: 250px;
+    width: 400px;
+}
 
 .right-pane {
     position: fixed;
     top: $header-height;
-    right: 0;
+    right: $rp-right-padding;
     padding: 10px;
     width: $rp-width;
     height: 600px;
     border-radius: 0;
     box-shadow: 0 5px 8px gray;
-    background: -webkit-linear-gradient(top, #EEE 0%, #FFF 30%);
+    background-color: white;
+    z-index: 10;
 
     .cloud-header {
         padding: 0;
@@ -152,16 +119,13 @@ body {
             border: 1px dashed magenta;
             vertical-align: middle;
             .name {
-                height: 50%;
-                border: 1px dotted blue;
-            }
-            .citation {
-                height: 50%;
+                padding: 5px;
+                height: 100%;
                 border: 1px dotted blue;
             }
         }
 
-        .photo {
+        #photo {
             display: inline-block;
             width: 16%;
             height: 100%;
