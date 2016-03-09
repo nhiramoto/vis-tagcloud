@@ -18,15 +18,16 @@ begin
         set fim=true;
     set autor=NEW.idPesquisador;
     open proximo_coautor;
-    repeat
+    cada_coautor: loop
         fetch proximo_coautor into coautor;
-        select n:=count(*) from Links
+        if (fim is true) then
+            leave cada_coautor;
+        end if;
+        delete from Links
             where ((idPesq1=autor and idPesq2=coautor) or
                   (idPesq1=coautor and idPesq2=autor));
-        if (n = 0) then
-            insert into Links value (autor, coautor);
-        end if;
-    until (fim=true) end repeat;
+        insert into Links value (autor, coautor);
+    end loop;
     close proximo_coautor;
 end$$
 

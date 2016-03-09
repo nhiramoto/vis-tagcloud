@@ -40,7 +40,6 @@ create table if not exists Publicacao_Keyword (
         foreign key (idKeyword) references Keyword (id)
 );
 
--- Preenchida pela trigger `create_links`
 create table if not exists Links (
     idPesq1 integer,
     idPesq2 integer,
@@ -49,4 +48,15 @@ create table if not exists Links (
         foreign key (idPesq1) references Pesquisador (id),
     constraint fk_links_pesq2
         foreign key (idPesq2) references Pesquisador (id)
+);
+
+create table if not exists Pesquisador_Keyword (
+    idPesquisador integer,
+    idKeyword integer,
+    peso float not null,
+    primary key (idPesquisador, idKeyword),
+    constraint fk_pesqkey_pesq
+        foreign key (idPesquisador) references Pesquisador (id),
+    constraint fk_pesqkey_key
+        foreign key (idKeyword) references Keyword (id)
 );
