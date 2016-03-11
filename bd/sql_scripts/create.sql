@@ -32,7 +32,7 @@ create table if not exists Pesquisador_Publicacao (
 create table if not exists Publicacao_Keyword (
     idPublicacao integer,
     idKeyword integer,
-    peso float not null,
+    peso float not null default 0,
     primary key (idPublicacao, idKeyword),
     constraint fk_pubkey_public
         foreign key (idPublicacao) references Publicacao (id),
@@ -53,7 +53,7 @@ create table if not exists Links (
 create table if not exists Pesquisador_Keyword (
     idPesquisador integer,
     idKeyword integer,
-    peso float not null,
+    peso float not null default 0,
     primary key (idPesquisador, idKeyword),
     constraint fk_pesqkey_pesq
         foreign key (idPesquisador) references Pesquisador (id),
