@@ -20,7 +20,8 @@ body {
   height: 50px;
   margin: 0;
   background: black;
-  color: white; }
+  color: white;
+  opacity: 0.8; }
   .header a {
     display: inline-block;
     color: inherit;
@@ -31,28 +32,42 @@ body {
   .header .title {
     display: inline-block;
     height: 35px;
-    width: 500px;
+    width: available;
     margin-left: 15px;
-    margin-top: 7px;
+    margin-top: 9px;
     font-family: "Bitstream Charter", "Helvetica", sans-serif;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 17px;
     text-align: left;
     vertical-align: top; }
+    .header .title .strong {
+      font-size: 23px; }
+    .header .title .strong:hover {
+      text-shadow: 0 0 8px #5294E2; }
   .header .cloud-icon {
     float: right;
     height: 100%;
     width: 60px;
-    cursor: pointer; }
-    .header .cloud-icon img {
-      vertical-align: middle;
-      height: 100%; }
+    cursor: pointer;
+    background: url("../res/white-cloud.png") no-repeat;
+    background-size: cover;
+    background-position: 0 -7px;
+    transition: background 300ms; }
+  .header .cloud-icon:hover {
+    background: url("../res/blue-cloud.png") no-repeat;
+    background-size: cover;
+    background-position: 0 -7px;
+    transition: background 100ms; }
 
-.content {
-  margin-top: 0px;
-  height: available;
-  width: available;
-  height: 90%; }
+#content {
+  margin-top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; }
+  #content svg {
+    width: 100%;
+    height: 100%;
+    border: 1px solid blue; }
 
 .dialog {
   position: fixed;
@@ -67,7 +82,7 @@ body {
   padding: 10px;
   width: 500px;
   height: 600px;
-  border-radius: 0;
+  border-radius: 0 0 0 5px;
   box-shadow: 0 5px 8px gray;
   background-color: white;
   z-index: 10; }
@@ -83,9 +98,9 @@ body {
       padding: 5px;
       border: 1px dashed magenta;
       vertical-align: middle; }
-      .right-pane .cloud-header .rsinfo .name {
+      .right-pane .cloud-header .rsinfo .autor-name {
         padding: 5px;
-        height: 100%;
+        height: 50%;
         border: 1px dotted blue; }
     .right-pane .cloud-header #photo {
       display: inline-block;
@@ -95,33 +110,41 @@ body {
       padding: 5px;
       border: 1px dashed red;
       vertical-align: middle; }
-  .right-pane svg {
+  .right-pane #cloud-content {
     width: 480px;
     height: 510px; }
 
-svg {
-  width: 100%;
-  height: 100%;
-  border: 1px solid blue; }
-
 .link {
-  stroke: #acacac;
+  stroke: #BCBCBC;
   stroke-width: 7px;
   cursor: pointer;
-  transition: all .3s ease; }
+  transition: all .6s ease; }
 
 .link:hover {
   transition: all .3s ease;
-  stroke: blue; }
+  stroke: #00448A; }
 
 .node {
-  stroke: #acacac;
-  stroke-width: 5px;
+  stroke: #BCBCBC;
+  stroke-width: 3px;
   cursor: pointer;
-  transition: all .7s ease; }
+  transition: all .6s ease; }
 
 .node:hover {
-  transition: all .7s ease;
-  stroke: blue; }
+  transition: all .3s ease;
+  stroke: #00448A;
+  stroke-width: 5px;
+  opacity: 1; }
+
+.label {
+  stroke: black;
+  stroke-width: 1px;
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+  font-family: "Bitstream Vera Sans", sans-serif;
+  opacity: 0.6;
+  pointer-events: none;
+  font-size: 13px;
+  text-weight: normal; }
 
 /*# sourceMappingURL=style.css.map */

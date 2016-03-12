@@ -65,7 +65,7 @@ end$$
 drop procedure if exists `insert_publicacao_keyword`$$
 create procedure `insert_publicacao_keyword`(idPublic integer, idKeyword integer, peso float)
 begin
-    insert into Publicacao_Keyword value (idPublic, idKeyword);
+    insert into Publicacao_Keyword value (idPublic, idKeyword, peso);
 end$$
 
 drop procedure if exists `remove_publicacao_keyword`$$

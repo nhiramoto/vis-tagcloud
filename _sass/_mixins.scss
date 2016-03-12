@@ -3,3 +3,10 @@
     height: -webkit-calc(100% - $exp);
     height:         calc(100% - $exp);
 }
+
+@mixin user-select($us) {
+    -webkit-user-select: $us;
+       -moz-user-select: $us;
+        -ms-user-select: $us;
+            user-select: $us;
+}
