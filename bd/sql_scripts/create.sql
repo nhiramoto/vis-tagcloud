@@ -1,10 +1,12 @@
-create database if not exists Tagcloud;
+create database if not exists Tagcloud
+    default character set utf8 collate utf8_unicode_ci;
 
 use Tagcloud;
 
 create table if not exists Pesquisador (
     id integer primary key,
-    nome varchar(45) unique not null
+    nome varchar(45) unique not null,
+    photoPath varchar(45) not null default 'res/default-avatar.png'
 );
 
 create table if not exists Publicacao (
@@ -32,7 +34,6 @@ create table if not exists Pesquisador_Publicacao (
 create table if not exists Publicacao_Keyword (
     idPublicacao integer,
     idKeyword integer,
-    peso float not null default 0,
     primary key (idPublicacao, idKeyword),
     constraint fk_pubkey_public
         foreign key (idPublicacao) references Publicacao (id),
@@ -48,15 +49,4 @@ create table if not exists Links (
         foreign key (idPesq1) references Pesquisador (id),
     constraint fk_links_pesq2
         foreign key (idPesq2) references Pesquisador (id)
-);
-
-create table if not exists Pesquisador_Keyword (
-    idPesquisador integer,
-    idKeyword integer,
-    peso float not null default 0,
-    primary key (idPesquisador, idKeyword),
-    constraint fk_pesqkey_pesq
-        foreign key (idPesquisador) references Pesquisador (id),
-    constraint fk_pesqkey_key
-        foreign key (idKeyword) references Keyword (id)
 );

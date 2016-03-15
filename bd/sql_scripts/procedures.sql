@@ -63,7 +63,7 @@ begin
 end$$
 
 drop procedure if exists `insert_publicacao_keyword`$$
-create procedure `insert_publicacao_keyword`(idPublic integer, idKeyword integer, peso float)
+create procedure `insert_publicacao_keyword`(idPublic integer, idKeyword integer, peso integer)
 begin
     insert into Publicacao_Keyword value (idPublic, idKeyword, peso);
 end$$
@@ -80,7 +80,7 @@ end$$
 drop procedure if exists `get_nodes`$$
 create procedure `get_nodes`()
 begin
-    select id, nome as name from Pesquisador;
+    select id, nome as name, photoPath as photo from Pesquisador;
 end$$
 
 drop procedure if exists `get_links`$$
@@ -89,27 +89,23 @@ begin
     select idPesq1 as source, idPesq2 as target from Links;
 end$$
 
--- drop procedure if exists `get_tags`$$
--- create procedure `get_tags`(in nid1 integer, in nid2 integer)
--- begin
-    -- if nid2 is null then
-        -- if nid1 is null then
-            -- signal sqlstate '45000'
-              -- set MESSAGE_TEXT='Pelo menos um id deve ser fornecido';
-        -- end if;
-        -- select nomeTag as text, peso as size from Tag, Tag_Pesquisador
-            -- where Tag.id=Tag_Pesquisador.idTag and
-                -- idPesquisador=nid1;
-    -- else
-        -- select nomeTag as text, peso as size from Tag,
-            -- (select idTag from Tag_Pesquisador
-                -- where idPesquisador=nid1
-            -- ) as s1,
-            -- (select idTag from Tag_Pesquisador
-                -- where idPesquisador=nid2
-            -- ) as s2
-            -- where Tag.id=s1.idTag and s1.idTag=s2.idTag;
-    -- end if;
--- end$$
+drop procedure if exists `get_tags`$$
+create procedure `get_tags`(in nid1 integer, in nid2 integer)
+begin
+    if ( (nid1 is null) and (nid2 is not null) ) then
+        set nid1 = nid2;
+        set nid2 = null;
+    end if;
+    if nid2 is null then
+        select id, word from Pesquisador_Keyword, Keyword
+            where Pesquisador_Keyword.idPesquisador = nid1
+                and Pesquisador_Keyword.idKeyword = Keyword.id;
+    else
+        select id, word from Keyword, Pesquisador_Keyword t1, Pesquisador_Keyword t2
+            where t1.idKeyword = t2.idKeyword and
+                t1.idPesquisador = nid1 and t2.idPesquisador = nid2 and
+                t1.idKeyword = Keyword.id;
+    end if;
+end$$
 
 delimiter ;

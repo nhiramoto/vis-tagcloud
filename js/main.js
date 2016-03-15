@@ -1,14 +1,13 @@
+var graph;
+
 $(document).ready(function() {
     $('.cloud-icon').unbind('click');
     $('.cloud-icon').bind('click', function(e) {
-        console.log('click!');
         toggleRightPane();
     });
 
     var isHide = false;
     var toggleRightPane = function() {
-        console.log('toggleRightPane');
-        console.log('isHide: ', isHide);
         if (isHide) {
             revealRightPane();
         } else {
@@ -42,5 +41,7 @@ $(document).ready(function() {
     };
 
     console.log('initializing graph...');
-    initGraph();
+    graph = new Graph();
+    graph.createGraph();
+
 });
