@@ -11,6 +11,8 @@ var Graph = function() {
     this.width = 800;
     this.height = 500;
 
+    this.cloud = new Cloud();
+
     this.force = d3.layout.force()
                     .size([this.width, this.height])
                     .charge(-220)
@@ -131,13 +133,14 @@ var Graph = function() {
     // };
 
     var node_click = function(d) {
-        console.log('id:', d.id, 'name: ', d.name);
+        console.log('node_click');
+        console.dir(d);
         $('#autor-name').text(d.name).css('text-transform', 'capitalize');
         $('#coautor-name').text('');
-        $('#photo').text('');
-        $('#photo').css('background', 'url("' + d.photo + '");');
-        console.log(d.photo);
-        // requestTags(d.id);
+        $('#photo1').removeClass('double');
+        $('#photo2').removeClass('double');
+        $('#photo1 > img').attr('src', d.photo);
+        self.cloud.requestTags(d.id);
     };
 
     // var link_mouseover = function() {
@@ -155,7 +158,17 @@ var Graph = function() {
     // };
 
     var link_click = function(d) {
-        console.log('nid1:', d.source.id, 'nid2:', d.target.id);
+        console.log('link:');
+        console.dir(d);
+        $('#autor-name').text(d.source.name).css('text-transform', 'capitalize');
+        $('#coautor-name').text(d.target.name).css('text-transform', 'capitalize');
+        if (!$('#photo1').hasClass('double'))
+            $('#photo1').addClass('double');
+        if (!$('#photo2').hasClass('double'))
+            $('#photo2').addClass('double');
+        $('#photo1 > img').attr('src', d.source.photo);
+        $('#photo2 > img').attr('src', d.target.photo);
+        self.cloud.requestTags(d.source.id, d.target.id);
     };
 
     // referência: http://www.coppelia.io/2014/07/an-a-to-z-of-extra-features-for-the-d3-force-layout/
@@ -183,24 +196,6 @@ var Graph = function() {
               return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
             });
         };
-    };
-
-    var requestTags = function(nid1, nid2) {
-        if (!nid1 && !nid2) {
-            throw new Error('Pelo menos um ID deve ser informado');
-        }
-        $.ajax({
-            url: 'php/get_tags.php',
-            type: 'GET',
-            dataType: 'json',
-            data: {fromApp: true},
-            success: function(data) {
-
-            },
-            error: function(request, status, errorThrow) {
-                console.error('Erro na requisição ', errorThrow);
-            }
-        });
     };
 
 };

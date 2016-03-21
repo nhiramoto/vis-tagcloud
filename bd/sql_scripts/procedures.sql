@@ -97,14 +97,14 @@ begin
         set nid2 = null;
     end if;
     if nid2 is null then
-        select id, word from Pesquisador_Keyword, Keyword
+        select Keyword.word as text, Pesquisador_Keyword.qtd as size from Pesquisador_Keyword, Keyword
             where Pesquisador_Keyword.idPesquisador = nid1
                 and Pesquisador_Keyword.idKeyword = Keyword.id;
     else
-        select id, word from Keyword, Pesquisador_Keyword t1, Pesquisador_Keyword t2
+        select k.word as text, t1.qtd + t2.qtd as size from Keyword k, Pesquisador_Keyword t1, Pesquisador_Keyword t2
             where t1.idKeyword = t2.idKeyword and
                 t1.idPesquisador = nid1 and t2.idPesquisador = nid2 and
-                t1.idKeyword = Keyword.id;
+                t1.idKeyword = k.id;
     end if;
 end$$
 

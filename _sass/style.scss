@@ -126,6 +126,7 @@ body {
     z-index: 10;
 
     .cloud-header {
+        position: relative;
         padding: 0;
         height: 70px;
         font-family: "DejaVu Serif", "Helvetica", sans-serif;
@@ -134,7 +135,7 @@ body {
 
         .rsinfo {
             display: inline-block;
-            width: 80%;
+            width: 75%;
             height: 100%;
             padding: 5px;
             vertical-align: middle;
@@ -144,20 +145,67 @@ body {
             }
         }
 
-        #photo {
+        #photo1, #photo2 {
+            position: absolute;
             display: inline-block;
             width: 16%;
             height: 100%;
             margin-top: 0;
-            padding: 5px;
-            border: 1px dashed red;
+            padding: 0;
+            border-radius: 3px;
+            box-shadow: 0 0 2px gray;
             vertical-align: middle;
+            transition: all .4s;
+            -webkit-transition-timing-function: ease-out;
+            transition-timing-function: ease-out;
+        }
+
+        #photo1 img, #photo2 img {
+            height: 100%;
+            width: 100%;
+        }
+
+        #photo2 {
+            visibility: hidden;
+        }
+
+        #photo1.double {
+            z-index: 2;
+            width: 10%;
+            height: 60%;
+            transition: all .2s ease;
+        }
+
+        #photo2.double {
+            visibility: visible;
+            z-index: 1;
+            display: inline-block;
+            width: 10%;
+            height: 60%;
+            margin-left: 40px;
+            margin-top: 30px;
+            transition: all .2s ease;
         }
     }
 
     #cloud-content {
+        position: relative;
         width: $rp-width - 20px;
         height: 510px;
+        border: 1px solid blue;
+    }
+
+    #cloud-content::before {
+        content: "";
+        z-index: -20;
+        position: absolute;
+        width: 50%;
+        height: 10px;
+        bottom: 0px;
+        // top: 80%;
+        max-width: 300px;
+        box-shadow: 0 15px 10px gray;
+        transform: rotate(-3deg);
     }
 }
 

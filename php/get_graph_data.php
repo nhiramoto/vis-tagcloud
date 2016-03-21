@@ -1,4 +1,5 @@
 <?php
+    header ('Content-type: application/json; charset=UTF-8');
     if (isset($_POST['fromApp']) and $_POST['fromApp'] == true) {
         $host = 'localhost';
         $dbname = 'Tagcloud';
@@ -6,7 +7,7 @@
         $mysql_password = '';
         try {
 
-            $conn = new PDO('mysql:'.$host.'=localhost;dbname='.$dbname, $mysql_user, $mysql_password);
+            $conn = new PDO('mysql:'.$host.'=localhost;dbname='.$dbname.';charset=utf8', $mysql_user, $mysql_password);
             $sql = $conn->prepare('call get_nodes();');
             $sql->execute();
             $nodes = $sql->fetchAll(PDO::FETCH_ASSOC);

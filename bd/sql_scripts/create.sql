@@ -50,3 +50,14 @@ create table if not exists Links (
     constraint fk_links_pesq2
         foreign key (idPesq2) references Pesquisador (id)
 );
+
+create table if not exists Pesquisador_Keyword (
+    idPesquisador integer,
+    idKeyword integer,
+    qtd integer not null default 0,
+    primary key (idPesquisador, idKeyword),
+    constraint fk_pesqkey_pesq
+        foreign key (idPesquisador) references Pesquisador (id),
+    constraint fk_pesqkey_key
+        foreign key (idKeyword) references Keyword (id)
+);

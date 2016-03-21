@@ -1,7 +1,7 @@
 <?php
     header ('Content-type: application/json; charset=UTF-8');
     if (isset($_GET["fromApp"])
-      and $_GET["fromApp"]==true) {
+      and $_GET["fromApp"] == true) {
 
         $host = 'localhost';
         $dbname = 'Tagcloud';

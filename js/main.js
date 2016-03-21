@@ -17,24 +17,22 @@ $(document).ready(function() {
     };
 
     var revealRightPane = function() {
-        console.log('revealRightPane');
         if (isHide) {
             $('.right-pane').animate({
                 width: 'show'
             }, {
-                duration: 800,
+                duration: 1000,
                 easing: 'easeOutElastic'
             });
         }
     };
 
     var hideRightPane = function() {
-        console.log('hideRightPane');
         if (!isHide) {
             $('.right-pane').animate({
                 width: 'hide'
             }, {
-                duration: 800,
+                duration: 1000,
                 easing: 'easeOutBounce'
             });
         }

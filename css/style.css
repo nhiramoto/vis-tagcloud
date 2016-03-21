@@ -87,6 +87,7 @@ body {
   opacity: 0.8;
   z-index: 10; }
   .right-pane .cloud-header {
+    position: relative;
     padding: 0;
     height: 70px;
     font-family: "DejaVu Serif", "Helvetica", sans-serif;
@@ -94,24 +95,60 @@ body {
     border-radius: 5px; }
     .right-pane .cloud-header .rsinfo {
       display: inline-block;
-      width: 80%;
+      width: 75%;
       height: 100%;
       padding: 5px;
       vertical-align: middle; }
       .right-pane .cloud-header .rsinfo .autor-name {
         padding: 5px;
         height: 50%; }
-    .right-pane .cloud-header #photo {
+    .right-pane .cloud-header #photo1, .right-pane .cloud-header #photo2 {
+      position: absolute;
       display: inline-block;
       width: 16%;
       height: 100%;
       margin-top: 0;
-      padding: 5px;
-      border: 1px dashed red;
-      vertical-align: middle; }
+      padding: 0;
+      border-radius: 3px;
+      box-shadow: 0 0 2px gray;
+      vertical-align: middle;
+      transition: all .4s;
+      -webkit-transition-timing-function: ease-out;
+      transition-timing-function: ease-out; }
+    .right-pane .cloud-header #photo1 img, .right-pane .cloud-header #photo2 img {
+      height: 100%;
+      width: 100%; }
+    .right-pane .cloud-header #photo2 {
+      visibility: hidden; }
+    .right-pane .cloud-header #photo1.double {
+      z-index: 2;
+      width: 10%;
+      height: 60%;
+      transition: all .2s ease; }
+    .right-pane .cloud-header #photo2.double {
+      visibility: visible;
+      z-index: 1;
+      display: inline-block;
+      width: 10%;
+      height: 60%;
+      margin-left: 40px;
+      margin-top: 30px;
+      transition: all .2s ease; }
   .right-pane #cloud-content {
+    position: relative;
     width: 480px;
-    height: 510px; }
+    height: 510px;
+    border: 1px solid blue; }
+  .right-pane #cloud-content::before {
+    content: "";
+    z-index: -20;
+    position: absolute;
+    width: 50%;
+    height: 10px;
+    bottom: 0px;
+    max-width: 300px;
+    box-shadow: 0 15px 10px gray;
+    transform: rotate(-3deg); }
 
 .link {
   stroke: #CDCDCD;
