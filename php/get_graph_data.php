@@ -1,6 +1,6 @@
 <?php
     header ('Content-type: application/json; charset=UTF-8');
-    if (isset($_POST['fromApp']) and $_POST['fromApp'] == true) {
+    // if (isset($_POST['fromApp']) and $_POST['fromApp'] == true) {
         $host = 'localhost';
         $dbname = 'Tagcloud';
         $mysql_user = 'root';
@@ -25,7 +25,7 @@
         } catch (PDOException $e) {
             echo 'Erro: <code class="erro">' . $e->getMessage() . '</code>';
         }
-    } else {
-        echo 'Acesse a página da aplicação.';
-    }
+    // } else {
+    //     echo 'Acesse a página da aplicação.';
+    // }
 ?>

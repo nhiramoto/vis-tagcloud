@@ -6,6 +6,7 @@ use Tagcloud;
 create table if not exists Pesquisador (
     id integer primary key,
     nome varchar(45) unique not null,
+    depart varchar(45) not null,
     photoPath varchar(45) not null default 'res/default-avatar.png'
 );
 
@@ -54,7 +55,7 @@ create table if not exists Links (
 create table if not exists Pesquisador_Keyword (
     idPesquisador integer,
     idKeyword integer,
-    qtd integer not null default 0,
+    qtd integer not null default 1,
     primary key (idPesquisador, idKeyword),
     constraint fk_pesqkey_pesq
         foreign key (idPesquisador) references Pesquisador (id),

@@ -80,7 +80,9 @@ end$$
 drop procedure if exists `get_nodes`$$
 create procedure `get_nodes`()
 begin
-    select id, nome as name, photoPath as photo from Pesquisador;
+    select id, nome as name, count(idPublicacao) as pub_weight, photoPath as photo from Pesquisador LEFT JOIN Pesquisador_Publicacao
+        ON Pesquisador.id=Pesquisador_Publicacao.idPesquisador
+        group by id;
 end$$
 
 drop procedure if exists `get_links`$$

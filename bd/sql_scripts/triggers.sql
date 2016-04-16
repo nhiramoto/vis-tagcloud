@@ -9,6 +9,7 @@ begin
     declare autor, coautor integer;
     declare fim boolean default false;
     declare n integer;
+    declare has boolean default false;
 
     declare idkey integer;
 
@@ -50,11 +51,13 @@ begin
             if fim is true then
                 leave loop2;
             end if;
-            update Pesquisador_Keyword set qtd = qtd+1
-                where idPesquisador = NEW.idPesquisador
-                    and idKeyword = idkey;
-            if row_count() = 0 then
-                insert into Pesquisador_Keyword
+            select exists(select 1 from Pesquisador_Keyword where idPesquisador=NEW.idPesquisador and idKeyword=idkey) into has;
+            if has then
+                update Pesquisador_Keyword set qtd = qtd + 1
+                    where idPesquisador = NEW.idPesquisador
+                        and idKeyword = idkey;
+            else
+                insert into Pesquisador_Keyword (idPesquisador, idKeyword, qtd)
                     value (NEW.idPesquisador, idkey, 1);
             end if;
         end loop;
@@ -67,6 +70,7 @@ create trigger nova_keyword after insert on Publicacao_Keyword
 for each row
 begin
     declare fim boolean default false;
+    declare has boolean default false;
     declare idpesq, qtd integer;
     declare proximo_idpesq cursor for
         select idPesquisador from Pesquisador_Publicacao
@@ -79,12 +83,14 @@ begin
         if fim is true then
             leave loop1;
         end if;
-        update Pesquisador_Keyword
-            set qtd = qtd + 1
-            where idPesquisador = idpesq
-                and idKeyword = NEW.idKeyword;
-        if row_count() = 0 then
-            insert into Pesquisador_Keyword
+        select exists(select 1 from Pesquisador_Keyword where idPesquisador=idpesq and idKeyword=NEW.idKeyword) into has;
+        if has then
+            update Pesquisador_Keyword
+                set Pesquisador_Keyword.qtd=Pesquisador_Keyword.qtd+1
+                where idPesquisador=idpesq
+                    and idKeyword = NEW.idKeyword;
+        else
+            insert into Pesquisador_Keyword (idPesquisador, idKeyword, qtd)
                 value (idpesq, NEW.idKeyword, 1);
         end if;
     end loop;

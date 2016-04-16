@@ -4,6 +4,10 @@ var Graph = function() {
 
     var colorScale = d3.scale.category10();
     var radius = 15;
+    var radiusScale = d3.scale.linear()
+                            .domain([0, 40])
+                            .range([5, 30]);
+
     var padding = 1;    // collision
 
     var maxNodeSize = 50;
@@ -51,7 +55,7 @@ var Graph = function() {
 
         self.node
             .append('circle')
-                .attr('r', radius)
+                .attr('r', function(d) { return radiusScale(parseInt(d.pub_weight)); })
                 .style('fill', function(d, i) { return colorScale(i); });
 
         // self.node
@@ -98,10 +102,9 @@ var Graph = function() {
             url: 'php/get_graph_data.php',
             type: 'POST',
             dataType: 'json',
-            data: {fromApp: true},
+            data: { fromApp: true },
             success: function(data) {
-                // console.log('data:');
-                // console.dir(data);
+
                 // data.links devem referenciar os objetos nós
                 for (var i = 0; i < data.links.length; i++) {
                     var source = data.links[i].source;
@@ -133,8 +136,6 @@ var Graph = function() {
     // };
 
     var node_click = function(d) {
-        console.log('node_click');
-        console.dir(d);
         $('#autor-name').text(d.name).css('text-transform', 'capitalize');
         $('#coautor-name').text('');
         $('#photo1').removeClass('double');
@@ -158,8 +159,6 @@ var Graph = function() {
     // };
 
     var link_click = function(d) {
-        console.log('link:');
-        console.dir(d);
         $('#autor-name').text(d.source.name).css('text-transform', 'capitalize');
         $('#coautor-name').text(d.target.name).css('text-transform', 'capitalize');
         if (!$('#photo1').hasClass('double'))

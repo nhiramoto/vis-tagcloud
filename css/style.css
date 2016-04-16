@@ -90,6 +90,7 @@ body {
     position: relative;
     padding: 0;
     height: 70px;
+    width: 480px;
     font-family: "DejaVu Serif", "Helvetica", sans-serif;
     box-shadow: inset 0 0 8px gray;
     border-radius: 5px; }
@@ -101,12 +102,12 @@ body {
       vertical-align: middle; }
       .right-pane .cloud-header .rsinfo .autor-name {
         padding: 5px;
-        height: 50%; }
+        height: 30px; }
     .right-pane .cloud-header #photo1, .right-pane .cloud-header #photo2 {
       position: absolute;
       display: inline-block;
       width: 16%;
-      height: 100%;
+      height: 70px;
       margin-top: 0;
       padding: 0;
       border-radius: 3px;
@@ -137,18 +138,7 @@ body {
   .right-pane #cloud-content {
     position: relative;
     width: 480px;
-    height: 510px;
-    border: 1px solid blue; }
-  .right-pane #cloud-content::before {
-    content: "";
-    z-index: -20;
-    position: absolute;
-    width: 50%;
-    height: 10px;
-    bottom: 0px;
-    max-width: 300px;
-    box-shadow: 0 15px 10px gray;
-    transform: rotate(-3deg); }
+    height: 510px; }
 
 .link {
   stroke: #CDCDCD;

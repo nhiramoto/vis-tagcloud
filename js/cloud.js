@@ -1,7 +1,9 @@
 function Cloud() {
     var self = this;
 
-    var colorScale = d3.scale.category10();
+    var colorScale = d3.scale.category20b();
+    var scale;
+    var maxSize;
 
     this.width = 500;
     this.height = 800;
@@ -18,11 +20,22 @@ function Cloud() {
 
     var drawCloud = function(words) {
         console.log('drawing words...');
-        console.log(words);
-        self.container
-            .selectAll('text')
-            .data(words)
-            .enter().append('text')
+        // console.log(words);
+        var selection = self.container
+                            .selectAll('text')
+                            .data(words);
+        // update
+        selection
+            .transition()
+                .ease('ease-out')
+                .duration(200)
+                .style('font-size', function(d) { return d.size + 'px'; })
+                .attr('transform', function(d) {
+                    return 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')scale(1)';
+                });
+        // enter
+        selection.enter()
+            .append('text')
                 .style('font-family', function(d) { return d.font; })
                 .style('font-size', function(d) { return d.size + "px"; })
                 .attr('text-anchor', 'middle')
@@ -31,7 +44,7 @@ function Cloud() {
                     return 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')scale(0.5)';
                 })
                 .style('opacity', 0.1)
-                .style('fill', function(d, i) { return colorScale(i); })
+                .style('fill', function(d) { return colorScale(d.size); })
                 // .style('fill', 'black')
                 .transition()
                     .ease('elastic-in')
@@ -40,20 +53,27 @@ function Cloud() {
                         return 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')scale(1)';
                     })
                     .style('opacity', 1);
-        self.container
-            .selectAll('text')
-            .data(words)
-            .exit().transition()
+        // exit
+        selection.exit()
+            .transition()
                 .ease('elastic-in')
-                .duration(500)
+                .duration(700)
                 .attr('transform', function(d) {
-                    return 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')scale(0)';
+                    return 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate+360 + ')scale(0)';
                 })
                 .style('opacity', 0)
                 .remove();
     };
 
     var updateCloud = function(data) {
+        var length = data.length;
+        scale = d3.scale.linear()
+                        .domain([0, length])
+                        .range([10, 100]);
+        maxSize = d3.max(data, function(d) { return d.size; });
+        // colorScale = d3.scale.linear()
+        //     .domain([0, maxSize])
+        //     .range(["#ddd", "#bbb", "#999", "#777", "#555", "#333", "#111", "#000"]);
         this.cloud = d3.layout.cloud()
                         .size([400, 400])
                         .words(data)
@@ -64,9 +84,18 @@ function Cloud() {
                         .timeInterval(10)
                         .spiral('rectangular')
                         .padding(1)
-                        .fontSize(function(d) { return d.size * self.weight; })
+                        .fontSize(function(d) { return scale(d.size); })
                         .on('end', drawCloud)
                         .start();
+    };
+
+    this.clear = function() {
+        $('#autor-name').text('Autor 1');
+        $('#coautor-name').text('Autor 2');
+        $('#photo1').removeClass('double');
+        $('#photo2').removeClass('double');
+        $('#photo1 > img').attr('src', '');
+        $('#photo2 > img').attr('src', '');
     };
 
     this.requestTags = function(nid1, nid2) {
@@ -79,8 +108,6 @@ function Cloud() {
                 dataType: "json",
                 data: {"fromApp": true, "nid1": nid1, "nid2": nid2},
                 success: function(data) {
-                    console.log('data');
-                    console.dir(data);
                     updateCloud(data);
                 },
                 error: function(request, status, errorThrown) {

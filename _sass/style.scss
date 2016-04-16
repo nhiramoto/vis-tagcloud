@@ -2,6 +2,7 @@
 
 $rp-width: 500px;
 $rp-right-padding: 0;
+$chd-height: 70px;
 
 $header-height: 50px;
 $header-bg: black;
@@ -128,7 +129,8 @@ body {
     .cloud-header {
         position: relative;
         padding: 0;
-        height: 70px;
+        height: $chd-height;
+        width: $rp-width - 20px;
         font-family: "DejaVu Serif", "Helvetica", sans-serif;
         box-shadow: inset 0 0 8px gray;
         border-radius: 5px;
@@ -141,7 +143,7 @@ body {
             vertical-align: middle;
             .autor-name {
                 padding: 5px;
-                height: 50%;
+                height: $chd-height/2 - 5px;
             }
         }
 
@@ -149,7 +151,7 @@ body {
             position: absolute;
             display: inline-block;
             width: 16%;
-            height: 100%;
+            height: $chd-height;
             margin-top: 0;
             padding: 0;
             border-radius: 3px;
@@ -192,21 +194,20 @@ body {
         position: relative;
         width: $rp-width - 20px;
         height: 510px;
-        border: 1px solid blue;
     }
 
-    #cloud-content::before {
-        content: "";
-        z-index: -20;
-        position: absolute;
-        width: 50%;
-        height: 10px;
-        bottom: 0px;
-        // top: 80%;
-        max-width: 300px;
-        box-shadow: 0 15px 10px gray;
-        transform: rotate(-3deg);
-    }
+    // #cloud-content::before {
+    //     content: "";
+    //     z-index: -20;
+    //     position: absolute;
+    //     width: 50%;
+    //     height: 10px;
+    //     bottom: 0px;
+    //     // top: 80%;
+    //     max-width: 300px;
+    //     box-shadow: 0 15px 10px gray;
+    //     transform: rotate(-3deg);
+    // }
 }
 
 // Graph

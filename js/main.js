@@ -35,6 +35,7 @@ $(document).ready(function() {
                 duration: 1000,
                 easing: 'easeOutBounce'
             });
+            graph.cloud.clear();
         }
     };
 
