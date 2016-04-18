@@ -194,6 +194,7 @@ body {
         position: relative;
         width: $rp-width - 20px;
         height: 510px;
+        overflow: scroll;
     }
 
     // #cloud-content::before {

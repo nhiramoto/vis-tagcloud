@@ -16,14 +16,14 @@ function Cloud() {
                         .attr('height', this.height)
                         .attr('class', 'cloud')
                     .append('g')
-                        .attr('transform', 'translate(200, 200)');
+                        .attr('transform', 'translate(250, 250)');
 
     var drawCloud = function(words) {
         console.log('drawing words...');
-        // console.log(words);
+        console.log(words);
         var selection = self.container
                             .selectAll('text')
-                            .data(words);
+                            .data(words, function(d) { return d.text; });
         // update
         selection
             .transition()

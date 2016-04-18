@@ -4,9 +4,7 @@ var Graph = function() {
 
     var colorScale = d3.scale.category10();
     var radius = 15;
-    var radiusScale = d3.scale.linear()
-                            .domain([0, 40])
-                            .range([5, 30]);
+    var radiusScale;
 
     var padding = 1;    // collision
 
@@ -112,6 +110,15 @@ var Graph = function() {
                     data.links[i].source = data.nodes[source-1];
                     data.links[i].target = data.nodes[target-1];
                 }
+                var max = 0;
+                for (var i = 0; i < data.nodes.length; i++) {
+                    if (data.nodes[i].pub_weight > max) {
+                        max = data.nodes[i].pub_weight;
+                    }
+                }
+                radiusScale = d3.scale.pow().exponent(.5)
+                                        .domain([0, max])
+                                        .range([5, 30]);
                 self.initGraph(data);
             },
             error: function(request, status, errorThrown) {
