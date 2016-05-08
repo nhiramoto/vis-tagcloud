@@ -67,7 +67,7 @@ function Cloud() {
 
     var updateCloud = function(data) {
         var length = data.length;
-        scale = d3.scale.linear()
+        scale = d3.scale.pow()
                         .domain([0, length])
                         .range([10, 100]);
         maxSize = d3.max(data, function(d) { return d.size; });

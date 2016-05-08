@@ -111,12 +111,12 @@ var Graph = function() {
                     data.links[i].target = data.nodes[target-1];
                 }
                 var max = 0;
-                for (var i = 0; i < data.nodes.length; i++) {
+                for (i = 0; i < data.nodes.length; i++) {
                     if (data.nodes[i].pub_weight > max) {
                         max = data.nodes[i].pub_weight;
                     }
                 }
-                radiusScale = d3.scale.pow().exponent(.5)
+                radiusScale = d3.scale.linear()
                                         .domain([0, max])
                                         .range([5, 30]);
                 self.initGraph(data);
