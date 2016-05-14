@@ -26,6 +26,9 @@ var Graph = function() {
 
     this.initGraph = function(data) {
 
+        console.log('data:');
+        console.dir(data);
+
         self.force
             .nodes(data.nodes)
             .links(data.links)
@@ -116,7 +119,7 @@ var Graph = function() {
                         max = data.nodes[i].pub_weight;
                     }
                 }
-                radiusScale = d3.scale.linear()
+                radiusScale = d3.scale.pow().exponent(0.5)
                                         .domain([0, max])
                                         .range([5, 30]);
                 self.initGraph(data);
