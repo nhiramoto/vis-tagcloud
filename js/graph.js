@@ -17,17 +17,17 @@ var Graph = function() {
 
     this.force = d3.layout.force()
                     .size([this.width, this.height])
-                    .charge(-220)
+                    .charge(-420)
                     .gravity(0.08)
-                    .friction(0.4)
-                    .linkDistance(110);
+                    .friction(0.6)
+                    .linkDistance(150);
 
     this.svg = d3.select('#content').append('svg');
 
     this.initGraph = function(data) {
 
-        console.log('data:');
-        console.dir(data);
+        // console.log('data:');
+        // console.dir(data);
 
         self.force
             .nodes(data.nodes)
@@ -106,7 +106,7 @@ var Graph = function() {
             data: { fromApp: true },
             success: function(data) {
 
-                // data.links devem referenciar os objetos nós
+                // data.links devem referenciar os objetos (não índices)
                 for (var i = 0; i < data.links.length; i++) {
                     var source = data.links[i].source;
                     var target = data.links[i].target;
