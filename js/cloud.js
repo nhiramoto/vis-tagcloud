@@ -54,9 +54,8 @@ function Cloud() {
                     .attr('transform', function(d) {
                         return 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')scale(1)';
                     })
-                    // .style('stroke', 'gray')
-                    // .style('stroke-width', 1)
-                    .style('text-shadow', '0 0 0.5px rgba(0, 0, 0, 0.8)')
+                    .style('stroke', 'gray')
+                    .style('stroke-width', 0.5)
                     .style('opacity', 1);
         // exit
         selection.exit()
