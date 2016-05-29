@@ -1,8 +1,8 @@
 #!/bin/bash
 
-lmysql -u root < clear.sql
-lmysql -u root < insert_pesquisador.sql
-lmysql -u root < insert_publicacao.sql
-lmysql -u root < insert_keyword.sql
-lmysql -u root < insert_pesquisador_publicacao.sql
-lmysql -u root < insert_publicacao_keyword.sql
+mysql -u root < clear.sql
+mysql -u root < insert_pesquisador.sql
+mysql -u root < insert_publicacao.sql
+mysql -u root < insert_keyword.sql
+mysql -u root < insert_pesquisador_publicacao.sql
+mysql -u root < insert_publicacao_keyword.sql

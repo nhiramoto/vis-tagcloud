@@ -1,7 +1,7 @@
 function Cloud() {
     var self = this;
 
-    var colorScale = d3.scale.category20b();
+    var colorScale = d3.scale.category20();
     var scale;
     var maxSize;
 
@@ -37,6 +37,7 @@ function Cloud() {
         selection.enter()
             .append('text')
                 .style('font-family', function(d) { return d.font; })
+                .style('font-weight', 'bold')
                 .style('font-size', function(d) { return d.size + "px"; })
                 .attr('text-anchor', 'middle')
                 .text(function(d) { return d.text; })
@@ -45,17 +46,17 @@ function Cloud() {
                 })
                 .style('opacity', 0.1)
                 .style('fill', function(d) { return colorScale(d.size); })
-                .style('stroke', 'white')
-                .style('stroke-width', 1)
-                // .style('fill', 'black')
+                // .style('stroke', 'black')
+                // .style('stroke-width', 1)
                 .transition()
                     .ease('elastic-in')
                     .duration(500)
                     .attr('transform', function(d) {
                         return 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')scale(1)';
                     })
-                    .style('stroke', 'lightgray')
-                    .style('stroke-width', 1)
+                    // .style('stroke', 'gray')
+                    // .style('stroke-width', 1)
+                    .style('text-shadow', '0 0 0.5px rgba(0, 0, 0, 0.8)')
                     .style('opacity', 1);
         // exit
         selection.exit()
@@ -90,7 +91,7 @@ function Cloud() {
                         .rotate(function() {
                             return ~~(Math.random() * 2) * 90;
                         })
-                        .font('Impact')
+                        .font('Impact, Bitstream Charter, sans-serif')
                         .timeInterval(10)
                         .spiral('rectangular')
                         .padding(1)
