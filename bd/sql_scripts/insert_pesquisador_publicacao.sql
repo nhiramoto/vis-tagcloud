@@ -184,4 +184,3 @@ insert into Pesquisador_Publicacao (idPesquisador, idPublicacao) value (3, 134);
 insert into Pesquisador_Publicacao (idPesquisador, idPublicacao) value (3, 135);
 -- insert into Pesquisador_Publicacao (idPesquisador, idPublicacao) value (3, 136);
 -- insert into Pesquisador_Publicacao (idPesquisador, idPublicacao) value (3, 137);
-
