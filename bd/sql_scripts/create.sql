@@ -13,7 +13,7 @@ create table if not exists Pesquisador (
 create table if not exists Publicacao (
     id integer primary key,
     titulo varchar(250) not null,
-    referencia varchar(250) not null,
+    localizacao varchar(250) not null,
     link varchar(45)
 );
 

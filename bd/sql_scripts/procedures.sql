@@ -18,9 +18,9 @@ begin
 end$$
 
 drop procedure if exists `insert_publicacao`$$
-create procedure `insert_publicacao`(in id integer, in titulo varchar(250), in referencia varchar(250), in link varchar(45))
+create procedure `insert_publicacao`(in id integer, in titulo varchar(250), in localizacao varchar(250), in link varchar(45))
 begin
-    insert into Publicacao value (id, titulo, referencia, link);
+    insert into Publicacao value (id, titulo, localizacao, link);
 end$$
 
 drop procedure if exists `remove_publicacao`$$
