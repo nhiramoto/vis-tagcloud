@@ -2,3 +2,4 @@
 .sass-cache/*
 cssexit*
 *.bak
+.~lock.data.ods#

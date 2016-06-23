@@ -37,7 +37,6 @@ function Cloud() {
         selection.enter()
             .append('text')
                 .style('font-family', function(d) { return d.font; })
-                .style('font-weight', 'bold')
                 .style('font-size', function(d) { return d.size + "px"; })
                 .attr('text-anchor', 'middle')
                 .text(function(d) { return d.text; })
@@ -54,8 +53,8 @@ function Cloud() {
                     .attr('transform', function(d) {
                         return 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')scale(1)';
                     })
-                    .style('stroke', 'gray')
-                    .style('stroke-width', 0.5)
+                    // .style('stroke', 'gray')
+                    // .style('stroke-width', 0.5)
                     .style('opacity', 1);
         // exit
         selection.exit()
@@ -71,12 +70,12 @@ function Cloud() {
 
     var updateCloud = function(data) {
         var length = data.length;
-        // console.log('keywords:');
-        // var keywords = [];
-        // for (var i = 0; i < length; i++) {
-        //     keywords.push(data[i].text);
-        // }
-        // console.dir(keywords);
+        console.log('keywords:');
+        var keywords = [];
+        for (var i = 0; i < length; i++) {
+            keywords.push(data[i].text);
+        }
+        console.dir(keywords);
         scale = d3.scale.pow()
                         .domain([0, length])
                         .range([10, 100]);
