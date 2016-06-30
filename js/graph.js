@@ -49,8 +49,8 @@ var Graph = function() {
                             .attr('transform', function(d) {
                                 return 'translate(' + d.x + ',' + d.y + ')';
                             })
-                            // .on('mouseover', node_mouseover)
-                            // .on('mouseout', node_mouseout)
+                            .on('mouseover', node_mouseover)
+                            .on('mouseout', node_mouseout)
                             .on('click', node_click)
                             .call(self.force.drag);
 
@@ -59,22 +59,17 @@ var Graph = function() {
                 .attr('r', function(d) { return radiusScale(parseInt(d.pub_weight)); })
                 .style('fill', function(d, i) { return colorScale(i); });
 
-        // self.node
-        //     .append('svg:image')
-        //         .attr('xlink:href', 'res/default-avatar.png')
-        //         .attr('x', '-25px')
-        //         .attr('y', '-25px')
-        //         .attr('width', '50px')
-        //         .attr('height', '50px')
-        //         .style('pointer-events', 'none')
-        //         .style('clip-path', function(d) {
-        //             return d3.select(this).select('circle');
-        //         });
-
-        self.node.append('svg:text')
+        self.node
+            .append('svg:text')
                 .attr('class', 'label')
-                .attr('dx', 18)
-                .attr('dy', -8)
+                .attr('dx', -8)
+                .attr('dy', 8)
+                .text(function(d) { return d.name.charAt(0); });
+        self.node
+            .append('svg:text')
+                .attr('class', 'label name')
+                .attr('dx', -8)
+                .attr('dy', 8)
                 .text(function(d) { return d.name; });
 
         self.node.append('title')
@@ -130,20 +125,17 @@ var Graph = function() {
         });
     };
 
-    // var node_mouseover = function() {
-        //stroke = d3.select(this).select('circle').style('stroke');
-        //d3.select(this).select('circle').transition()
-            //.duration(400)
-            //.attr('r', radius+8)
-            //.style('box-shadow', '0 0 3px blue');
-    // };
-    //
-    // var node_mouseout = function() {
-        //d3.select(this).select('circle').transition()
-            //.duration(400)
-            //.attr('r', radius)
-            //.style('box-shadow', '');
-    // };
+    var node_mouseover = function() {
+        d3.select(this).select('.name').transition()
+            .duration(300)
+            .style('opacity', '0.8');
+    };
+
+    var node_mouseout = function() {
+        d3.select(this).select('.name').transition()
+            .duration(500)
+            .style('opacity', '0');
+    };
 
     var node_click = function(d) {
         $('#autor-name').text(d.name).css('text-transform', 'capitalize');

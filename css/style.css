@@ -168,10 +168,14 @@ body {
   stroke-width: 1px;
   stroke-linecap: butt;
   stroke-linejoin: miter;
-  font-family: "Bitstream Vera Sans", sans-serif;
-  opacity: 0.6;
+  font-family: "Bitstream Charter", "Times New Roman", serif;
+  opacity: 1;
   pointer-events: none;
-  font-size: 13px;
-  text-weight: normal; }
+  font-size: 24px;
+  text-weight: normal;
+  fill: black; }
+
+.name {
+  opacity: 0; }
 
 /*# sourceMappingURL=style.css.map */

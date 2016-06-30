@@ -242,13 +242,18 @@ $stroke-color: #CDCDCD;
 }
 
 .label {
-    stroke: black;
+    fill: #222;
+    stroke: #222;
     stroke-width: 1px;
     stroke-linecap: butt;
     stroke-linejoin: miter;
-    font-family: "Bitstream Vera Sans", sans-serif;
-    opacity: 0.6;
+    font-family: "Bitstream Charter", "Times New Roman", serif;
+    opacity: 1;
     pointer-events: none;
-    font-size: 13px;
+    font-size: 24px;
     text-weight: normal;
+}
+
+.name {
+    opacity: 0;
 }
