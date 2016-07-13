@@ -33,10 +33,8 @@ begin
             if (fim is true) then
                 leave loop1;
             end if;
-            delete from Links
-                where ((idPesq1=autor and idPesq2=coautor) or
-                      (idPesq1=coautor and idPesq2=autor));
-            insert into Links value (autor, coautor);
+            insert into Links (idPesq1, idPesq2, qtd) value (autor, coautor, 1)
+                on duplicate key update qtd=qtd+1;
         end loop;
     end;
     close proximo_coautor;

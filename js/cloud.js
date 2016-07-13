@@ -1,7 +1,7 @@
 function Cloud() {
     var self = this;
 
-    var colorScale = d3.scale.category20();
+    var colorScale = d3.scale.category20c();
     var scale;
     var maxSize;
 

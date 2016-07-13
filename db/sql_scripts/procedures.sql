@@ -88,7 +88,7 @@ end$$
 drop procedure if exists `get_links`$$
 create procedure `get_links`()
 begin
-    select idPesq1 as source, idPesq2 as target from Links;
+    select idPesq1 as source, idPesq2 as target, qtd as link_weight from Links;
 end$$
 
 drop procedure if exists `get_tags`$$

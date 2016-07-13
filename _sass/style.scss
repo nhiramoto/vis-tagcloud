@@ -248,12 +248,11 @@ $stroke-color: #CDCDCD;
     stroke-linecap: butt;
     stroke-linejoin: miter;
     font-family: "Bitstream Charter", "Times New Roman", serif;
-    opacity: 1;
     pointer-events: none;
-    font-size: 24px;
+    font-size: 16px;
     text-weight: normal;
 }
 
 .name {
-    opacity: 0;
+    opacity: 0.6;
 }

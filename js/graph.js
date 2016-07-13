@@ -5,6 +5,7 @@ var Graph = function() {
     var colorScale = d3.scale.category10();
     var radius = 15;
     var radiusScale;
+    var linkWidthScale;
 
     var padding = 1;    // collision
 
@@ -18,7 +19,7 @@ var Graph = function() {
     this.force = d3.layout.force()
                     .size([this.width, this.height])
                     .charge(-420)
-                    .gravity(0.08)
+                    .gravity(0.05)
                     .friction(0.6)
                     .linkDistance(150);
 
@@ -38,6 +39,7 @@ var Graph = function() {
                         .data(data.links)
                         .enter().append('line')
                             .attr('class', 'link')
+                            .style('stroke-width', function(d) { return linkWidthScale(parseInt(d.link_weight)); })
                             // .on('mouseover', link_mouseover)
                             // .on('mouseout', link_mouseout)
                             .on('click', link_click);
@@ -59,17 +61,17 @@ var Graph = function() {
                 .attr('r', function(d) { return radiusScale(parseInt(d.pub_weight)); })
                 .style('fill', function(d, i) { return colorScale(i); });
 
-        self.node
-            .append('svg:text')
-                .attr('class', 'label')
-                .attr('dx', -8)
-                .attr('dy', 8)
-                .text(function(d) { return d.name.charAt(0); });
+        // self.node
+        //     .append('svg:text')
+        //         .attr('class', 'label')
+        //         .attr('dx', -8)
+        //         .attr('dy', 8)
+        //         .text(function(d) { return d.name.charAt(0); });
         self.node
             .append('svg:text')
                 .attr('class', 'label name')
-                .attr('dx', -8)
-                .attr('dy', 8)
+                .attr('dx', -25)
+                .attr('dy', function(d) { return -radiusScale(parseInt(d.pub_weight)) - 10; })
                 .text(function(d) { return d.name; });
 
         self.node.append('title')
@@ -108,15 +110,24 @@ var Graph = function() {
                     data.links[i].source = data.nodes[source-1];
                     data.links[i].target = data.nodes[target-1];
                 }
-                var max = 0;
+                var maxRad = 0;
                 for (i = 0; i < data.nodes.length; i++) {
-                    if (data.nodes[i].pub_weight > max) {
-                        max = data.nodes[i].pub_weight;
+                    if (data.nodes[i].pub_weight > maxRad) {
+                        maxRad = data.nodes[i].pub_weight;
                     }
                 }
                 radiusScale = d3.scale.pow().exponent(0.5)
-                                        .domain([0, max])
+                                        .domain([0, maxRad])
                                         .range([5, 30]);
+                var maxLinkWidth = 0;
+                for (i = 0; i < data.links.length; i++) {
+                    if (data.links[i].link_weight > maxLinkWidth) {
+                        maxLinkWidth = data.links[i].link_weight;
+                    }
+                }
+                linkWidthScale = d3.scale.linear()
+                                        .domain([0, maxLinkWidth])
+                                        .range([1, 10]);
                 self.initGraph(data);
             },
             error: function(request, status, errorThrown) {
@@ -128,13 +139,13 @@ var Graph = function() {
     var node_mouseover = function() {
         d3.select(this).select('.name').transition()
             .duration(300)
-            .style('opacity', '0.8');
+            .style('opacity', '1');
     };
 
     var node_mouseout = function() {
         d3.select(this).select('.name').transition()
             .duration(500)
-            .style('opacity', '0');
+            .style('opacity', '0.6');
     };
 
     var node_click = function(d) {
@@ -172,7 +183,7 @@ var Graph = function() {
         self.cloud.requestTags(d.source.id, d.target.id);
     };
 
-    // referência: http://www.coppelia.io/2014/07/an-a-to-z-of-extra-features-for-the-d3-force-layout/
+    // fonte: http://www.coppelia.io/2014/07/an-a-to-z-of-extra-features-for-the-d3-force-layout/
     var collide = function(alpha) {
         var quadtree = d3.geom.quadtree(graph.nodes);
         return function(d) {

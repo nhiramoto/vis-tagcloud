@@ -44,6 +44,7 @@ create table if not exists Publicacao_Keyword (
 create table if not exists Links (
     idPesq1 integer,
     idPesq2 integer,
+    qtd integer default 1 not null,
     primary key (idPesq1, idPesq2),
     constraint fk_links_pesq1
         foreign key (idPesq1) references Pesquisador (id),

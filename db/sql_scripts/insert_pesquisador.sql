@@ -1,10 +1,10 @@
 use Tagcloud;
 
-insert into Pesquisador(id, nome, depart) value (1, "Artero, Almir O.", "Matemática e Computação");
-insert into Pesquisador(id, nome, depart) value (2, "Olivete Junior, Celso", "Matemática e Computação");
-insert into Pesquisador(id, nome, depart) value (3, "Eler, Danilo M.", "Matemática e Computação");
-insert into Pesquisador(id, nome, depart) value (4, "Piteri, Marco A.", "Matemática e Computação");
-insert into Pesquisador(id, nome, depart) value (5, "Dias, Maurício A.", "Matemática e Computação");
-insert into Pesquisador(id, nome, depart) value (6, "Shimabukuru, Milton H.", "Matemática e Computação");
-insert into Pesquisador(id, nome, depart) value (7, "Garcia, Rogério E.", "Matemática e Computação");
-insert into Pesquisador(id, nome, depart) value (8, "Correia, Ronaldo C.M.", "Matemática e Computação");
+insert into Pesquisador(id, nome, depart) value (1, "Professor 1", "Matemática e Computação");
+insert into Pesquisador(id, nome, depart) value (2, "Professor 2", "Matemática e Computação");
+insert into Pesquisador(id, nome, depart) value (3, "Professor 3", "Matemática e Computação");
+insert into Pesquisador(id, nome, depart) value (4, "Professor 4", "Matemática e Computação");
+insert into Pesquisador(id, nome, depart) value (5, "Professor 5", "Matemática e Computação");
+insert into Pesquisador(id, nome, depart) value (6, "Professor 6", "Matemática e Computação");
+insert into Pesquisador(id, nome, depart) value (7, "Professor 7", "Matemática e Computação");
+insert into Pesquisador(id, nome, depart) value (8, "Professor 8", "Matemática e Computação");
