@@ -19,11 +19,15 @@ var Graph = function() {
     this.force = d3.layout.force()
                     .size([this.width, this.height])
                     .charge(-420)
-                    .gravity(0.05)
+                    .gravity(0.03)
                     .friction(0.6)
                     .linkDistance(150);
 
-    this.svg = d3.select('#content').append('svg');
+    var svg = d3.select('#content').append('svg')
+                .call(d3.behavior.zoom().on("zoom", function () {
+                    svg.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
+                }))
+                .append('g');
 
     this.initGraph = function(data) {
 
@@ -35,7 +39,7 @@ var Graph = function() {
             .links(data.links)
             .start();
 
-        self.link = self.svg.selectAll('.link')
+        self.link = svg.selectAll('.link')
                         .data(data.links)
                         .enter().append('line')
                             .attr('class', 'link')
@@ -44,7 +48,7 @@ var Graph = function() {
                             // .on('mouseout', link_mouseout)
                             .on('click', link_click);
 
-        self.node = self.svg.selectAll('.node')
+        self.node = svg.selectAll('.node')
                         .data(data.nodes)
                         .enter().append('g')
                             .attr('class', 'node')

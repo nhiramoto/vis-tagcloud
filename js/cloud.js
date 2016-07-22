@@ -1,27 +1,34 @@
 function Cloud() {
     var self = this;
 
-    var colorScale = d3.scale.category20c();
+    var colorScale = d3.scale.category20b();
     var scale;
     var maxSize;
 
-    this.width = 500;
-    this.height = 800;
+    var width = 500;
+    var height = 800;
+    var margin = 250;
 
-    this.weight = 20;
+    var weight = 20;
 
-    this.container = d3.select('#cloud-content')
+    var zoom = d3.behavior.zoom();
+    zoom.translate();
+
+    var container = d3.select('#cloud-content')
                     .append('svg')
-                        .attr('width', this.width)
-                        .attr('height', this.height)
+                        .attr("width", width)
+                        .attr("height", height)
                         .attr('class', 'cloud')
+                        .call(zoom.on("zoom", function () {
+                            container.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
+                        }))
                     .append('g')
-                        .attr('transform', 'translate(250, 250)');
+                        .attr('transform', 'translate(' + margin + ',' + margin + ')');
 
     var drawCloud = function(words) {
         console.log('drawing words...');
         // console.log(words);
-        var selection = self.container
+        var selection = container
                             .selectAll('text')
                             .data(words, function(d) { return d.text; });
         // update
