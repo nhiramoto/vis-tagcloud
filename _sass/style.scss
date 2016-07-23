@@ -104,6 +104,7 @@ body {
         height: 100%;
         border: 1px solid blue;
         @include user-select(none);
+        // @radial-gradient(white, red);
     }
 }
 
@@ -198,6 +199,7 @@ body {
         // overflow: scroll;
         svg {
             position: absolute;
+            cursor: default;
             @include user-select(none);
         }
     }

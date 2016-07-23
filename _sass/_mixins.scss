@@ -10,3 +10,10 @@
         -ms-user-select: $us;
             user-select: $us;
 }
+
+@mixin radial-gradient($colors...) {
+    background: -webkit-radial-gradient($colors);
+    background:   -moz-radial-gradient($colors);
+    background:     -o-radial-gradient($colors);
+    background:        radial-gradient($colors);
+}

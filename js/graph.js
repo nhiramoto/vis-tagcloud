@@ -11,6 +11,11 @@ var Graph = function() {
 
     var maxNodeSize = 50;
 
+    var minZoom = 0.1;
+    var maxZoom = 7;
+    var zoom = d3.behavior.zoom()
+                    .scaleExtent([minZoom, maxZoom]);
+
     this.width = 800;
     this.height = 500;
 
@@ -24,10 +29,14 @@ var Graph = function() {
                     .linkDistance(150);
 
     var svg = d3.select('#content').append('svg')
-                .call(d3.behavior.zoom().on("zoom", function () {
-                    svg.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
-                }))
-                .append('g');
+                        .style('cursor', 'move');
+    svg.call(zoom);
+
+    var container = svg.append('g');
+
+    zoom.on('zoom', function() {
+        container.attr('transform', 'translate(' + d3.event.translate + ')scale(' + d3.event.scale + ')');
+    });
 
     this.initGraph = function(data) {
 
@@ -39,7 +48,7 @@ var Graph = function() {
             .links(data.links)
             .start();
 
-        self.link = svg.selectAll('.link')
+        self.link = container.selectAll('.link')
                         .data(data.links)
                         .enter().append('line')
                             .attr('class', 'link')
@@ -48,7 +57,7 @@ var Graph = function() {
                             // .on('mouseout', link_mouseout)
                             .on('click', link_click);
 
-        self.node = svg.selectAll('.node')
+        self.node = container.selectAll('.node')
                         .data(data.nodes)
                         .enter().append('g')
                             .attr('class', 'node')
@@ -57,6 +66,9 @@ var Graph = function() {
                             })
                             .on('mouseover', node_mouseover)
                             .on('mouseout', node_mouseout)
+                            .on('mousedown', function() {
+                                d3.event.stopPropagation();
+                            })
                             .on('click', node_click)
                             .call(self.force.drag);
 

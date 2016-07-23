@@ -145,6 +145,7 @@ body {
     height: 510px; }
     .right-pane #cloud-content svg {
       position: absolute;
+      cursor: default;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;

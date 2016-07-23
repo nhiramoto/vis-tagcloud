@@ -12,9 +12,8 @@ function Cloud() {
     var weight = 20;
 
     var zoom = d3.behavior.zoom();
-    zoom.translate();
 
-    var container = d3.select('#cloud-content')
+    var svg = d3.select('#cloud-content')
                     .append('svg')
                         .attr("width", width)
                         .attr("height", height)
@@ -22,7 +21,9 @@ function Cloud() {
                         .call(zoom.on("zoom", function () {
                             container.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
                         }))
-                    .append('g')
+                        ;
+
+    var container = svg.append('g')
                         .attr('transform', 'translate(' + margin + ',' + margin + ')');
 
     var drawCloud = function(words) {

@@ -3,3 +3,5 @@
 cssexit*
 *.bak
 .~lock.data.ods#
+bower_components
+bower_components/*
