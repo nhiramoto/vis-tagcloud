@@ -23,16 +23,33 @@ var Graph = function() {
 
     this.force = d3.layout.force()
                     .size([this.width, this.height])
-                    .charge(-420)
+                    .charge(-720)
                     .gravity(0.03)
-                    .friction(0.6)
+                    .friction(0.7)
                     .linkDistance(150);
 
     var svg = d3.select('#content').append('svg')
-                        .style('cursor', 'move');
+                        .style('cursor', 'move')
+                        .style('background', '#DDD');
     svg.call(zoom);
 
     var container = svg.append('g');
+    var radialGradient = svg.append('defs')
+                            .append('radialGradient')
+                                .attr('id', 'radial-gradient');
+
+    radialGradient.append('stop')
+            .attr('offset', '0%')
+            .attr('stop-color', 'white');
+    radialGradient.append('stop')
+            .attr('offset', '100%')
+            .attr('stop-color', '#DDD');
+
+    container.append('circle')
+                .attr('r', 1000)
+                .attr('cx', 400)
+                .attr('cy', 300)
+                .style('fill', 'url(#radial-gradient)');
 
     zoom.on('zoom', function() {
         container.attr('transform', 'translate(' + d3.event.translate + ')scale(' + d3.event.scale + ')');
@@ -108,6 +125,20 @@ var Graph = function() {
                 .attr('y2', function(d) { return d.target.y; });
             //node.each(collide(0.5));
         });
+
+        // svg.on('mousemove', function() {
+        //     fisheye.focus(d3.mouse(this));
+        //
+        //     self.node.each(function(d) { d.fisheye = fisheye(d); })
+        //         .attr('cx', function(d) { return d.fisheye.x; })
+        //         .attr('cy', function(d) { return d.fisheye.y; })
+        //         .attr('r', function(d) { return d.fisheye.z * 4.5; });
+        //     self.link
+        //         .attr('x1', function(d) { return d.source.fisheye.x; })
+        //         .attr('y1', function(d) { return d.source.fisheye.y; })
+        //         .attr('x2', function(d) { return d.target.fisheye.x; })
+        //         .attr('y2', function(d) { return d.target.fisheye.y; });
+        // });
 
     };
 

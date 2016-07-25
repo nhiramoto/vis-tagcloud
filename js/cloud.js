@@ -2,16 +2,22 @@ function Cloud() {
     var self = this;
 
     var colorScale = d3.scale.category20b();
-    var scale;
+    var scale = null;
     var maxSize;
+    var opacityScale = null;
 
     var width = 500;
     var height = 800;
-    var margin = 250;
+    var offsetX = 250;
+    var offsetY = 250;
 
-    var weight = 20;
+    var cloudWidth = 400;
+    var cloudHeight = 400;
+
+    var text = null;
 
     var zoom = d3.behavior.zoom();
+    zoom.translate([offsetX, offsetY]);
 
     var svg = d3.select('#cloud-content')
                     .append('svg')
@@ -20,20 +26,19 @@ function Cloud() {
                         .attr('class', 'cloud')
                         .call(zoom.on("zoom", function () {
                             container.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
-                        }))
-                        ;
+                        }));
 
     var container = svg.append('g')
-                        .attr('transform', 'translate(' + margin + ',' + margin + ')');
+                        .attr('transform', 'translate(' + offsetX + ',' + offsetY + ')');
 
     var drawCloud = function(words) {
         console.log('drawing words...');
         // console.log(words);
-        var selection = container
-                            .selectAll('text')
-                            .data(words, function(d) { return d.text; });
+        text = container
+                .selectAll('text')
+                .data(words, function(d) { return d.text; });
         // update
-        selection
+        text
             .transition()
                 .ease('ease-out')
                 .duration(200)
@@ -42,7 +47,7 @@ function Cloud() {
                     return 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')scale(1)';
                 });
         // enter
-        selection.enter()
+        text.enter()
             .append('text')
                 .style('font-family', function(d) { return d.font; })
                 .style('font-size', function(d) { return d.size + "px"; })
@@ -65,7 +70,7 @@ function Cloud() {
                     // .style('stroke-width', 0.5)
                     .style('opacity', 1);
         // exit
-        selection.exit()
+        text.exit()
             .transition()
                 .ease('elastic-in')
                 .duration(700)
@@ -74,20 +79,52 @@ function Cloud() {
                 })
                 .style('opacity', 0)
                 .remove();
+
+        // var lensCheck = false;
+        // var disableRot = false;
+        //
+        // svg.on('mousemove', function() {
+        //     var mCoord = d3.mouse(this);
+        //     mCoord[0] = mCoord[0] - offsetX;
+        //     mCoord[1] = mCoord[1] - offsetY;
+        //     fisheye.focus(mCoord);
+        //     text.each(function(d) { d.fisheye = fisheye(d); })
+        //     .attr('transform', function(d) {
+        //         if (!disableRot) {
+        //             if (d.fisheye.rot == -1)
+        //                 return 'translate(' + [d.fisheye.x, d.fisheye.y] + ')rotate(' + d.rotate + ')';
+        //             return 'translate(' + [d.fisheye.x, d.fisheye.y] + ')rotate(' + d.rotate + ')';
+        //         } else {
+        //             if (d.fisheye.rot == -1)
+        //                 return 'translate(' + [d.fisheye.x, d.fisheye.y] + ')rotate(' + d.rotate + ')';
+        //             return 'translate(' + [d.fisheye.x, d.fisheye.y] + ')rotate(' + d.fisheye.rot + ')';
+        //         }
+        //     })
+        //     .style('font-size', function(d) {
+        //         if (d.fisheye.size == -1) {
+        //             return d.size + 'px';
+        //         } else {
+        //             return d.fisheye.size + 'px';
+        //         }
+        //     });
+        // });
     };
 
     var updateCloud = function(data) {
         var length = data.length;
-        console.log('keywords:');
-        var keywords = [];
-        for (var i = 0; i < length; i++) {
-            keywords.push(data[i].text);
-        }
-        console.dir(keywords);
+        // console.log('keywords:');
+        // var keywords = [];
+        // for (var i = 0; i < length; i++) {
+        //     keywords.push(data[i].text);
+        // }
+        // console.dir(keywords);
         scale = d3.scale.pow()
                         .domain([0, length])
                         .range([10, 100]);
         maxSize = d3.max(data, function(d) { return d.size; });
+        opacityScale = d3.scale.linear()
+                            .domain([0, maxSize])
+                            .range([0.1, 1]);
         // colorScale = d3.scale.linear()
         //     .domain([0, maxSize])
         //     .range(["#ddd", "#bbb", "#999", "#777", "#555", "#333", "#111", "#000"]);
@@ -113,6 +150,11 @@ function Cloud() {
         $('#photo2').removeClass('double');
         $('#photo1 > img').attr('src', '');
         $('#photo2 > img').attr('src', '');
+        console.log('clear***');
+    };
+
+    this.resetZoom = function() {
+
     };
 
     this.requestTags = function(nid1, nid2) {
