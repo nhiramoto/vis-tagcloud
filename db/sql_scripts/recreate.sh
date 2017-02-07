@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo 'drop database if exists Tagcloud;' | lmysql -u root
-lmysql -u root < create.sql
-lmysql -u root < procedures.sql
-lmysql -u root < triggers.sql
+echo 'drop database if exists Tagcloud;' | mysql -u root
+mysql -u root < create.sql
+mysql -u root < procedures.sql
+mysql -u root < triggers.sql
